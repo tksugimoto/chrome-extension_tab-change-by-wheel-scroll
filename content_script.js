@@ -8,10 +8,9 @@ let tabMoving = false;
 const useCapture = true;
 
 const onmousedown = evt => {
-	rightButtonPressing = evt.button === Buttons.Right;
 	chrome.runtime.sendMessage({
 		"key": "rightButtonMouseDownStateChanged",
-		"value": rightButtonPressing
+		"value": evt.button === Buttons.Right
 	});
 };
 document.addEventListener("mousedown", onmousedown, useCapture);
@@ -30,13 +29,11 @@ document.addEventListener("wheel", onwheel, useCapture);
 
 const oncontextmenu = evt => {
 	if (tabMoving) {
-		tabMoving = false;
 		evt.preventDefault();
 	}
-	rightButtonPressing = false;
 	chrome.runtime.sendMessage({
 		"key": "rightButtonMouseDownStateChanged",
-		"value": rightButtonPressing
+		"value": false
 	});
 };
 document.addEventListener("contextmenu", oncontextmenu, useCapture);

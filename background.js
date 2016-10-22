@@ -26,9 +26,8 @@ const onMessageFunctions = {
 		chrome.windows.get(windowId, {
 			populate: true
 		}, ({tabs}) => {
-			const nonActiveTabIdList = tabs.map(tab => tab.id).filter(tabId => tabId !== currentTabId);
-			nonActiveTabIdList.forEach(tabId => {
-				chrome.tabs.sendMessage(tabId, {
+			tabs.forEach(tab => {
+				chrome.tabs.sendMessage(tab.id, {
 					key: "rightButtonMouseDownStateChanged",
 					value: value
 				});
