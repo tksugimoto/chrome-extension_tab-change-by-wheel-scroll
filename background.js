@@ -38,7 +38,9 @@ const onMessageFunctions = {
 		chrome.windows.get(windowId, {
 			populate: true
 		}, ({tabs}) => {
-			const tabIdList = tabs.map(tab => tab.id);
+			const tabIdList = tabs.filter(tab => {
+				return tab.url && !tab.url.startsWith("https://chrome.google.com/webstore/");
+			}).map(tab => tab.id);
 			const currentTabIndex = tabIdList.indexOf(currentTabId);
 			const numberOfTabs = tabIdList.length;
 			const targetTabIndex = (currentTabIndex - wheelBearing + numberOfTabs) % numberOfTabs;
