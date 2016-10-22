@@ -22,7 +22,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 const onMessageFunctions = {
-	"rightButtonMouseDownStateChanged": ({value}, {tab: {windowId, id: currentTabId}}) => {
+	"rightButtonMouseDownStateChanged": ({value}, {tab: {windowId}}) => {
 		chrome.windows.get(windowId, {
 			populate: true
 		}, ({tabs}) => {
